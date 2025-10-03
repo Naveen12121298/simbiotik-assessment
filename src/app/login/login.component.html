@@ -2,10 +2,25 @@
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="bg-white p-6 rounded-xl shadow-md w-80">
     <h2 class="text-2xl font-bold mb-4 text-center">Login</h2>
 
-    <input formControlName="username" type="username" placeholder="username" class="w-full p-2 border rounded mb-3"/>
-    <input formControlName="password" type="password" placeholder="Password" class="w-full p-2 border rounded mb-3"/>
+    <input
+      formControlName="username"
+      type="text"
+      placeholder="Username"
+      class="w-full p-2 border rounded mb-3"
+    />
+    <input
+      formControlName="password"
+      type="password"
+      placeholder="Password"
+      class="w-full p-2 border rounded mb-3"
+    />
 
-    <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
+    <!-- Button disabled if form is invalid -->
+    <button
+      type="submit"
+      class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 disabled:bg-gray-400"
+      [disabled]="loginForm.invalid"
+    >
       Login
     </button>
   </form>

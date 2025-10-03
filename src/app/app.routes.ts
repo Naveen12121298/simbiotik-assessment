@@ -20,6 +20,7 @@ export const routes: Routes = [
     component: DashboardComponent,
     canActivate: [authGuard],
     children: [
+     { path: '', redirectTo: 'todos', pathMatch: 'full' },
       { path: 'todos', component: TodoListComponent },
       { path: 'todos/new', component: TodoFormComponent },
       { path: 'todos/edit/:id', component: TodoFormComponent },
