@@ -1,0 +1,69 @@
+<div>
+  <h2 class="text-xl font-bold mb-4">TODO List</h2>
+  <button (click)="addTodo()" class="bg-green-500 text-white px-4 py-2 rounded mb-4">+ Add TODO</button>
+
+  <!-- Spinner while loading -->
+  <div *ngIf="loading" class="flex justify-center items-center py-10">
+    <div class="w-10 h-10 border-4 border-green-500 border-t-transparent rounded-full animate-spin"></div>
+  </div>
+
+  <!-- TODO Table -->
+  <table *ngIf="!loading && todos.length > 0" class="w-full border rounded shadow">
+    <tr class="bg-gray-200">
+      <th class="p-2 border">ID</th>
+      <th class="p-2 border">Title</th>
+      <th class="p-2 border">Actions</th>
+    </tr>
+    <tr *ngFor="let todo of todos">
+      <td class="p-2 border">{{todo.id}}</td>
+      <td class="p-2 border">{{todo.title}}</td>
+      <td class="p-2 border flex gap-2">
+        <!-- View Icon -->
+        <button (click)="openViewModal(todo)" class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded" title="View">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+               viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+          </svg>
+        </button>
+
+        <!-- Edit Icon -->
+        <button (click)="editTodo(todo.id)" class="bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded" title="Edit">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+               viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M11 5H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5m-6-6l6 6m0 0l-6 6m6-6H6" />
+          </svg>
+        </button>
+
+        <!-- Delete Icon -->
+        <button (click)="deleteTodo(todo.id)" class="bg-red-500 hover:bg-red-600 text-white p-2 rounded" title="Delete">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+               viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </td>
+    </tr>
+  </table>
+
+  <!-- No Data Message -->
+  <div *ngIf="!loading && todos.length === 0" class="text-center text-gray-500 py-6">
+    No TODOs found.
+  </div>
+</div>
+
+<!-- Modal -->
+<div *ngIf="isModalOpen" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white rounded shadow-lg p-6 w-96 relative">
+    <h3 class="text-lg font-bold mb-4">TODO Details</h3>
+    <p><strong>ID:</strong> {{selectedTodo?.id}}</p>
+    <p><strong>Title:</strong> {{selectedTodo?.title}}</p>
+    <p><strong>Description:</strong> {{selectedTodo?.description}}</p>
+    <p><strong>Completed:</strong> {{selectedTodo?.isCompleted ? 'Yes' : 'No'}}</p>
+    <button (click)="closeModal()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">&times;</button>
+  </div>
+</div>

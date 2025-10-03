@@ -1,0 +1,72 @@
+<div class="flex h-screen relative">
+  <!-- Mobile menu toggle button -->
+  <div class="md:hidden absolute top-4 left-4 z-50" style="margin-top: -40px;">
+    <button (click)="mobileMenuOpen = !mobileMenuOpen" class="text-gray-800 bg-gray-200 p-2 rounded">
+      <svg *ngIf="!mobileMenuOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+      <svg *ngIf="mobileMenuOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Sidebar -->
+  <div
+    class="w-64 bg-gray-800 text-white p-4 md:block fixed md:relative h-full z-40 transition-transform transform"
+    [ngClass]="{'-translate-x-full md:translate-x-0': !mobileMenuOpen, 'translate-x-0': mobileMenuOpen}"
+  >
+    <h2 class="text-lg font-bold mb-6">Simbiotik Tests</h2>
+    <ul class="space-y-1">
+      <li>
+        <a
+          routerLink="/dashboard/todos"
+          routerLinkActive="bg-gray-600 text-white font-bold rounded"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="block p-2 rounded text-gray-400 hover:bg-gray-600 hover:text-white transition"
+          (click)="mobileMenuOpen = false"
+        >
+          Practice Test 1 - TODO
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/dashboard/weather"
+          routerLinkActive="bg-gray-600 text-white font-bold rounded"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="block p-2 rounded text-gray-400 hover:bg-gray-600 hover:text-white transition"
+          (click)="mobileMenuOpen = false"
+        >
+          Practice Test 2 - Weather
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/dashboard/map"
+          routerLinkActive="bg-gray-600 text-white font-bold rounded"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="block p-2 rounded text-gray-400 hover:bg-gray-600 hover:text-white transition"
+          (click)="mobileMenuOpen = false"
+        >
+          Practice Test 3 - Map Route
+        </a>
+      </li>
+    </ul>
+
+    <button (click)="logout()" class="mt-6 bg-red-500 px-4 py-2 rounded hover:bg-red-600 transition w-full">
+      Logout
+    </button>
+  </div>
+
+  <!-- Mobile overlay -->
+  <div
+    class="fixed inset-0 bg-black bg-opacity-40 z-30 md:hidden"
+    *ngIf="mobileMenuOpen"
+    (click)="mobileMenuOpen = false"
+  ></div>
+
+  <!-- Main Content -->
+  <div class="flex-1 bg-gray-100 p-6 md:ml-64">
+    <router-outlet></router-outlet>
+  </div>
+</div>

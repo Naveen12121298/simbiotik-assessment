@@ -1,0 +1,47 @@
+<div class="max-w-md mx-auto bg-white p-6 rounded shadow">
+  <h2 class="text-xl font-bold mb-4">
+    {{ todoId ? 'Edit TODO' : 'Add TODO' }}
+  </h2>
+
+  <form [formGroup]="todoForm" (ngSubmit)="onSubmit()" class="space-y-4">
+
+    <!-- Title Field -->
+    <div>
+      <label class="block font-medium mb-1">Title</label>
+      <input
+        type="text"
+        formControlName="title"
+        class="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
+        placeholder="Enter TODO title"
+      />
+      <!-- Error Message -->
+      <div *ngIf="todoForm.controls['title'].touched && todoForm.controls['title'].invalid"
+           class="mt-1 text-red-600 text-sm bg-red-100 p-2 rounded">
+         Title is required.
+      </div>
+    </div>
+
+    <!-- Description Field -->
+    <div>
+      <label class="block font-medium mb-1">Description</label>
+      <textarea
+        formControlName="description"
+        class="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
+        placeholder="Enter description"
+      ></textarea>
+    </div>
+
+    <!-- Completed Checkbox -->
+    <div class="flex items-center gap-2">
+      <input type="checkbox" formControlName="isCompleted" id="isCompleted" />
+      <label for="isCompleted">Completed</label>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit"
+      class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded w-full">
+      {{ todoId ? 'Update TODO' : 'Add TODO' }}
+    </button>
+
+  </form>
+</div>
