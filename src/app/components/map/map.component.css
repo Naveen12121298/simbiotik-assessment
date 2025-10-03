@@ -1,0 +1,6 @@
+#map {
+  height: 50vh;   /* Full screen height */
+  width: 100%;     /* Full width */
+  position: relative;
+  z-index: 0;      /* Make sure tiles aren't overlapped */
+}
